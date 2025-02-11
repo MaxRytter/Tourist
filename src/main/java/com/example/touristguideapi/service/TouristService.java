@@ -17,11 +17,24 @@ private final TouristRepository touristRepository;
     public List<TouristAttraction> getAllAttractions(){
         return touristRepository.getAllAttractions();
     }
-//    public TouristAttraction printSteder (String navn) {
-//        TouristAttraction message = touristRepository.printSteder(navn);
-//        if (touristRepository) {
-//            return new TouristAttraction(navn, message.getDescription());
-//        }
-//        return message;
-//    }
+    public TouristAttraction findAttractionByName(String name){
+    TouristAttraction attraction = touristRepository.findAttractionByName(name);
+    if(attraction != null && attraction.getName().equalsIgnoreCase(name)){
+        return new TouristAttraction(attraction.getName(), attraction.getDescription());
+    }
+    return null;
+    }
+
+    public TouristAttraction addAttraction(TouristAttraction attraction){
+        return touristRepository.addAttraction(attraction);
+    }
+
+    public TouristAttraction updateDescription(String name, String description) {
+        TouristAttraction attraction = touristRepository.updateDescription(name, description);
+        return attraction;
+    }
+
+    public TouristAttraction removeAttraction(String name) {
+        return touristRepository.removeAttraction(name);
+    }
 }
