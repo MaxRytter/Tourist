@@ -18,6 +18,7 @@ private final TouristService touristService;
     public TouristController(TouristService touristService) {
         this.touristService = touristService;
     }
+    //En GetMapping til forside http://localhost:8080/
 @GetMapping("/")
     public String showFrontPage(Model model) {
         List<TouristAttraction> attractionslist = touristService.getAllAttractions();
@@ -64,6 +65,6 @@ public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String 
         TouristAttraction deleteAttraction = touristService.removeAttraction(name);
         return new ResponseEntity<>(deleteAttraction, HttpStatus.OK);
     }
-    //En GetMapping til forside http://localhost:8080/
+
 
 }

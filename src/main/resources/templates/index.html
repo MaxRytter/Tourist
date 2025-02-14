@@ -8,11 +8,9 @@
 <body>
 <nav>
     <a href="/">Home</a>
-    <!-- Attractions Dropdown -->
     <div class="dropdown">
         <a href="#">Attractions</a>
         <div class="dropdown-content">
-            <!-- Loop through attractions and create links -->
             <div th:each="attraction : ${attractionslist}">
                 <a th:href="@{/attractions/{name}(name=${attraction.name})}" th:text="${attraction.name}"></a>
             </div>
