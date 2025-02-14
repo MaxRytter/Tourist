@@ -20,7 +20,7 @@ public class TouristRepository {
     private void steder() {
         repositoryListe.add(new TouristAttraction("Tivoli", "Forlystelsespark"));
         repositoryListe.add(new TouristAttraction("ZoologiskHave", "Se på dyr"));
-        repositoryListe.add(new TouristAttraction("Noerrebroparken", "En park hvor du kan se drugdeals"));
+        repositoryListe.add(new TouristAttraction("Nørrebroparken", "En park hvor du kan se drugdeals"));
     }
 
     public List<TouristAttraction> getAllAttractions(){

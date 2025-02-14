@@ -66,5 +66,4 @@ public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String 
         return new ResponseEntity<>(deleteAttraction, HttpStatus.OK);
     }
 
-
 }
