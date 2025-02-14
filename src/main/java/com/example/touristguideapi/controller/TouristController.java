@@ -5,12 +5,12 @@ import com.example.touristguideapi.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-//en RequestMapping til vores attraktioner http://localhost:8080/attractions
-@RequestMapping("/attractions")
 //Controller klasse
 public class TouristController {
 private final TouristService touristService;
@@ -18,14 +18,24 @@ private final TouristService touristService;
     public TouristController(TouristService touristService) {
         this.touristService = touristService;
     }
+@GetMapping("/")
+    public String showFrontPage(Model model) {
+        List<TouristAttraction> attractionslist = touristService.getAllAttractions();
+        System.out.println("Attractions: " + attractionslist);
+        model.addAttribute("attractionslist", attractionslist);
+        return "index";
+    }
+
     //en GetMapping til alle attraktioner
-@GetMapping("")
+@GetMapping("/attractions")
     public ResponseEntity<List<TouristAttraction>> getAllAttractions(){
         List<TouristAttraction> attractions = touristService.getAllAttractions();
         return new ResponseEntity<>(attractions, HttpStatus.OK);
 }
+
+
 //en GetMapping til en specifik attraktion, f.eks. http://localhost:8080/attractions/tivoli
-    @GetMapping("/{name}")
+    @GetMapping("/attractions/{name}")
 public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String name) {
     TouristAttraction attraction = touristService.findAttractionByName(name);
         return new ResponseEntity<>(attraction, HttpStatus.OK);
@@ -41,7 +51,7 @@ public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String 
 
     //http://localhost:8080/attractions/update/Tivoli
     //en PostMapping der opdaterer beskrivelsen på den skrevne attraktion i json
-    @PostMapping("/update/{name}")
+    @PostMapping("/attractions/update/{name}")
     public ResponseEntity<TouristAttraction> updateDescription(@PathVariable String name, @RequestBody TouristAttraction attraction) {
         TouristAttraction updateAttraction = touristService.updateDescription(name, attraction.getDescription());
         return new ResponseEntity<>(updateAttraction, HttpStatus.OK);
@@ -49,9 +59,11 @@ public ResponseEntity<TouristAttraction> getAttractionName(@PathVariable String 
 
     //http://localhost:8080/attractions/delete/Tivoli
     //DeleteMapping som fjerner en Attraktion
-    @DeleteMapping("/delete/{name}")
+    @PostMapping("/attractions/delete/{name}")
     public ResponseEntity<TouristAttraction> removeAttraction(@PathVariable String name) {
         TouristAttraction deleteAttraction = touristService.removeAttraction(name);
         return new ResponseEntity<>(deleteAttraction, HttpStatus.OK);
     }
+    //En GetMapping til forside http://localhost:8080/
+
 }

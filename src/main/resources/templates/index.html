@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Tourist Guide</title>
+    <link rel ="stylesheet" th:href="@{main.css}">
+</head>
+<body>
+<nav>
+    <a href="/">Home</a>
+    <!-- Attractions Dropdown -->
+    <div class="dropdown">
+        <a href="#">Attractions</a>
+        <div class="dropdown-content">
+            <!-- Loop through attractions and create links -->
+            <div th:each="attraction : ${attractionslist}">
+                <a th:href="@{/attractions/{name}(name=${attraction.name})}" th:text="${attraction.name}"></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+<div>
+    <h1>Velkommen til vores turistguide!</h1>
+    <p>Her kan du finde en masse attraktioner i København som passer til folk i alle aldre! <br>
+    Der attraktioner som spænder helt fra naturoplevelser, til kulturoplevelser og endda også noget for dem der kan lide at få et sus i maven!</p>
+
+</div>
+</main>
+<footer>Kontakt os: Max Rytter: gå ind i den nærmeste kebabbutik! Najib: nærmeste børnehave! Mads Hvid: Verdensmesterskaberne i skak(som tilskuer) Marcus: kontakt WoW Hardcore Guildleader i OnlyFangs</footer>
+</body>
+</html>
